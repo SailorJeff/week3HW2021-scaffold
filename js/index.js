@@ -35,23 +35,26 @@ function shuffle(array) {
 function startGame() {
   // Invoke shuffle function and store in variable
   const shuffledDeck = shuffle(deckCards);
+
   // Implement a for loop on the shuffledDeck array
+  for (var i = 0; i < shuffledDeck.length; i++) {
   
     // Create the <td> tags and assign it to a variable called tdTag
-    
+    const tdTag = document.createElement('td');
     // Give tdTag Element a class of card
-    
+    tdTag.classList.add('card');
     // Create the <img> tag and assign it to an addImage variable
-    
+    const addImage = document.createElement('img');
     // make the addImage a child of the tdTag
-    
+    tdTag.appendChild(addImage);
     // Set the addImage element src path with the shuffled deck
     // TODO: replace the REPLACE ME string with the element in the shuffledDeck array at index i
-    addImage.setAttribute('src', 'img/' + 'REPLACE ME with the element in shuffleDeck at index i');
+    addImage.setAttribute('src', 'img/' + shuffledDeck[i]);
     // Add an alt tag to the addImage element
     addImage.setAttribute('alt', 'image of vault boy from fallout');
     // make the tdTag element a child of the deck element
-    
+    deck.appendChild(tdTag);
+  }
 }
 
 startGame();
@@ -126,11 +129,17 @@ function adjustStarRating() {
 // TODO: stub out this function after the compare the two images src comment
 function compareTwo() {
   // When there are 2 cards in the opened array
-  if (opened.length === 2) {
+  if (opened.length === 2 && opened[0].src === opened[1].src) {
     // Disable any further mouse clicks on other cards
     document.body.style.pointerEvents = "none";
+    displayMatchingCards();
+    console.log("It's a Match!!");
+  } else if (opened.length === 2 && opened[0].src !== opened[1].src) {
+    displayNotMatchingCards();
+    console.log("No Match!");
   }
   // Compare the two images src in the opened array
+
   // TODO: implement
   // if the opened array has a length of two && the element at index = 0 src string
   // equals the element at index 1 src string
@@ -158,10 +167,12 @@ function displayMatchingCards() {
     opened[0].parentElement.classList.add("match");
     opened[1].parentElement.classList.add("match");
     // TODO: Push the flipped cards (opened[0] and opened[1]) to the matched array
-    
+    matched.push(opened[0]);
+    matched.push(opened[1]);
     // Allow for further mouse clicks on cards
     document.body.style.pointerEvents = "auto";
     // TODO: invoke the checkIsGameFinished function
+    checkIsGameFinished();
     
    
     // Clear the opened array
@@ -196,14 +207,14 @@ function addStatsToModal() {
   for (let i = 1; i <= 3; i++) {
     // Create a new Paragraph
     // TODO: create p tag and assign it a newly created statsElement variable
-    
+    const statsElement = document.createElement('p');
     // Add a class to the new Paragraph
     // TODO: add the stats class to the statsElement
-    
+    statsElement.classList.add('stats');
     
     // Add the new created <p> tag to the modal content
     // TODO: add the statsElement as a child of the statsParent element
-    
+    statsParent.appendChild(statsElement);
   }
   // Select all p tags with the class of stats and update the content
   let p = statsParent.querySelectorAll("p.stats");
@@ -217,15 +228,17 @@ function addStatsToModal() {
 // TODO: Implement the pseudocode
 function displayModal() {
 // use getElementByID to grab the id="close" element and assign it to a variable called modalClose
-
+    const modalClose = document.getElementById('close');
 // use getElementByID to grab the id="modal" element and assign it to a variable called modal
-
+    const modal = document.getElementById('modal');
 // Set modal to display block to show it
+    modal.style.display = "block";
 
 
 // When the user clicks on the modalClose <span> (x), 
 modalClose.onclick = function() {
     // set modal to diplay none
+    modal.style.display = "none";
     
 };
 // When the user clicks anywhere outside of the modal, close it
@@ -244,13 +257,16 @@ function checkIsGameFinished() {
   if (matched.length === 16) {
     // stop the game
     //TODO: invoke the stopTime function
+    stopTime();
     
     // tally stats
     // TODO: invoke the addStatsToModal
+    addStatsToModal();
     
     
     // display modal
     // TODO: invoke the displayModal function
+    displayModal();
     
     
   }

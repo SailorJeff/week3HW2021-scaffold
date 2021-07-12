@@ -7,6 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Fallout Memory Game</title>
     <!-- TODO: Connect the given styles file to this HTML -->
+    
+    <!-- Connect the CSS Style sheet so that the HTML file can pull needed resources & accoutrements from CSS -->
+    <link rel="stylesheet" href="./styles/styles.css">  
+
 </head>
 <body>
     <div class="container">
@@ -14,13 +18,13 @@
             <h1>Memory Game</h1>
             <h2>FallOut Edition</h2>
         </header>
-
+        
         <section class="score-panel">
             <h3>Score Panel</h3>
-        <ul id="star-rating" class="star-rating">
-            <li class="star"><i class="fa fa-star"></i></li>
-            <li class="star"><i class="fa fa-star"></i></li>
-            <li class="star"><i class="fa fa-star"></i></li>
+            <ul id="star-rating" class="star-rating">
+                <li class="star"><i class="fa fa-star"></i></li>
+                <li class="star"><i class="fa fa-star"></i></li>
+                <li class="star"><i class="fa fa-star"></i></li>
             </ul>
             <span class="moves-counter">0</span> Moves
             <div class="timer-container">
@@ -32,15 +36,29 @@
         </section>
         <!-- Modal section-->
         <table>
-            <tr class="deck"></tr>
+            <tr class="deck">
+            </tr>            
         </table>
+        <p class="stats"></p>
     </div>
-
+    
     <!-- Modal -->
     <section class="win-game-modal">
+        <div class="modal" id="modal">
+            <div class="modal-content">
+                <span id="close">&times;</span>
+                <h2>Congratulations!</h2> 
+                <p>You found all 8 pairs! You win!</p>
+                <img src="./img/Vault-Boy-Thumb-Up.jpg" alt="Vault Boy - Thumbs Up!">
+                <button class="btn play-again-btn">Play Again?</button>
+                
+            </div>
+        </div>
         
     </section>
-
+    
     <!-- TODO: Connect the given JS file to your HTML -->
+    <!-- Connect the JS Script index so that the HTML file can call needed actions, orders & identifiers from JS -->
+    <script src="./js/index.js"></script>
 </body>
 </html>
